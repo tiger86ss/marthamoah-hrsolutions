@@ -1,3 +1,8 @@
+@import "variables";
+@import "base";
+
+@import "bootstrap/scss/bootstrap";
+
 .intro {
   height: 600px !important;
   background: url("/assets/img/christina-wocintechchat-com-KAULAzQwxzE-unsplash.jpg")
@@ -30,5 +35,20 @@
   .about-overlay {
     left: -10px;
     bottom: -80px;
+    width: 300px;
   }
+}
+
+.btn,
+input.form-control, textarea {
+  border-radius: 0;
+}
+
+.btn-primary {
+  color: #fff;
+}
+
+.breadcrumb-bg-img {
+  background: linear-gradient(rgba(255, 0, 31, 0.48), rgba(0, 123, 255, 0.2)),
+    url("/assets/img/banner.jpg") center / cover;
 }

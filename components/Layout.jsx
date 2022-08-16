@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Script from "next/script";
 import React from "react";
-import Footer from "./footer";
-import Header from "./header";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const Layout = (props) => {
   return (
@@ -17,17 +17,11 @@ const Layout = (props) => {
           href="https://fonts.gstatic.com"
           crossOrigin="true"
         />
-        <link
-          href="/assets/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet"></link>
-        <link href="/assets/css/styles.css" rel="stylesheet" />
-        <link href="/assets/css/Her-Carousel.css" rel="stylesheet" />
-        <link href="/assets/css/Featured-Cards.css" rel="stylesheet" />
       </Head>
       <Header />
       {props.children}
       <Footer />
-      <Script src="/assets/js/bootstrap.min.js" />
+      <Script src="/assets/bootstrap/js/bootstrap.min.js" />
       <Script src="/assets/js/bs-init.js" />
     </>
   );

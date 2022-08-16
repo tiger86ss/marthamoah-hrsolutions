@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import Layout from "../../research/components/Layout";
+import Layout from "../components/Layout";
+import Banner from "../components/Banner";
 
 function Home() {
+  const [message, setMessage] = useState("");
   const form = useRef();
 
   const sendEmail = (e) => {
@@ -17,50 +19,33 @@ function Home() {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          setMessage(result.text);
         },
         (error) => {
-          console.log(error.text);
+          setMessage(error.text);
         }
       );
   };
 
   return (
     <Layout title="Contact us">
-      <div className="mb-5 py-5 bg-light">
-        <div className="container">
-          <div className="d-flex justify-content-between container">
-            <h3 className="text-nowrap">Contact us</h3>
-            <ol className="breadcrumb d-flex justify-content-end container mt-1">
-              <li className="breadcrumb-item text-decoration-none">
-                <a className="text-decoration-none" href="#">
-                  <span>Home</span>
-                </a>
-              </li>
-              <li className="breadcrumb-item">
-                <a className="text-decoration-none" href="#">
-                  <span>Contact us</span>
-                </a>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
+      <Banner title="Contact us" />
       <section className="position-relative py-4 py-xl-5">
         <div className="container position-relative">
           <div className="row mb-5">
             <div className="col-md-8 col-xl-6 text-center mx-auto">
               <h2>Contact us</h2>
-              <p className="w-lg-50">
-                Your Hr problem can be solved with a competent team with a dedicated service. Get in touch
+              <p className="w-lg-50 fs-5">
+                Your Hr problem can be solved with a competent team with a
+                dedicated service. Get in touch
               </p>
             </div>
           </div>
           <div className="row d-flex justify-content-center">
-            <div className="col-md-6 col-lg-4 col-xl-4">
+            <div className="col-md-6 col-lg-4 col-xl-4 mb-5">
               <div className="d-flex flex-column justify-content-center align-items-start h-100">
                 <div className="d-flex align-items-center p-3">
-                  <div className="bs-icon-md bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
+                  <div className="p-3 text-white me-3 bg-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="1em"
@@ -72,19 +57,19 @@ function Home() {
                     </svg>
                   </div>
                   <div className="px-2">
-                    <h6 className="mb-0">Phone</h6>
-                    <p className="mb-0">
+                    <h6 className="mb-0 text-primary">Phone</h6>
+                    <p className="mb-0 fs-5">
                       +233 20 1966 286
                       <br />
                     </p>
-                    <p className="mb-0">
+                    <p className="mb-0 fs-5">
                       +233 20 842 7839
                       <br />
                     </p>
                   </div>
                 </div>
                 <div className="d-flex align-items-center p-3">
-                  <div className="bs-icon-md bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
+                  <div className="p-3 text-white me-3 bg-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="1em"
@@ -98,15 +83,15 @@ function Home() {
                     </svg>
                   </div>
                   <div className="px-2">
-                    <h6 className="mb-0">Email</h6>
-                    <p className="mb-0">
+                    <h6 className="mb-0 text-primary">Email</h6>
+                    <p className="mb-0 fs-5">
                       info@marthaamoah-hrsolutions.com
                       <br />
                     </p>
                   </div>
                 </div>
                 <div className="d-flex align-items-center p-3">
-                  <div className="bs-icon-md bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
+                  <div className="p-3 text-white me-3 bg-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="1em"
@@ -118,16 +103,16 @@ function Home() {
                     </svg>
                   </div>
                   <div className="px-2">
-                    <h6 className="mb-0">Location</h6>
-                    <p className="mb-0">
+                    <h6 className="mb-0 text-primary">Location</h6>
+                    <p className="mb-0 fs-5">
                       3rd Floor, Adom Nipa Plaza
                       <br />
                     </p>
-                    <p className="mb-0">
+                    <p className="mb-0 fs-5">
                       Amakom, Near KNUST
                       <br />
                     </p>
-                    <p className="mb-0">
+                    <p className="mb-0 fs-5">
                       Kumasi, Ashanti Region
                       <br />
                     </p>
@@ -137,28 +122,38 @@ function Home() {
             </div>
             <div className="col-md-6 col-lg-5 col-xl-4">
               <div>
+                {message && (
+                  <p
+                    className={`${
+                      message == "OK" ? "text-success" : "text-danger"
+                    }`}>
+                    {message == "OK"
+                      ? "Email sent successfully"
+                      : "Email not sent, try again"}
+                  </p>
+                )}
                 <form ref={form} onSubmit={sendEmail}>
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <input
-                      className="form-control"
+                      className="form-control form-control-lg"
                       type="text"
                       id="name-1"
                       name="user_name"
                       placeholder="Name"
                     />
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <input
-                      className="form-control"
+                      className="form-control form-control-lg"
                       type="email"
                       id="email-1"
                       name="user_email"
                       placeholder="Email"
                     />
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <textarea
-                      className="form-control"
+                      className="form-control form-control-lg rounded-0"
                       id="message-1"
                       name="message"
                       rows="6"
@@ -166,7 +161,7 @@ function Home() {
                   </div>
                   <div>
                     <button
-                      className="btn btn-primary d-block w-100"
+                      className="btn btn-primary btn-lg d-block w-100"
                       type="submit">
                       Send
                     </button>
